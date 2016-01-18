@@ -6,8 +6,9 @@ ENV DOCUMENT_ROOT=/var/www/public_html
 WORKDIR ${DOCUMENT_ROOT}/..
 
 # Install Roundcube + plugins
-RUN rm -rf * \
-    && git clone --branch 1.1.3 --depth 1 https://github.com/roundcube/roundcubemail.git . \
+RUN VERSION=`latestversion roundcube/roundcubemail` \
+    && rm -rf * \
+    && git clone --branch ${VERSION} --depth 1 https://github.com/roundcube/roundcubemail.git . \
     && mv composer.json-dist composer.json \
     && rm -rf .git installer
 RUN composer require --update-no-dev \
