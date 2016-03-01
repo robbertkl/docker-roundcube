@@ -9,9 +9,10 @@ WORKDIR ${DOCUMENT_ROOT}/..
 RUN VERSION=`latestversion roundcube/roundcubemail` \
     && rm -rf * \
     && git clone --branch ${VERSION} --depth 1 https://github.com/roundcube/roundcubemail.git . \
-    && mv composer.json-dist composer.json \
     && rm -rf .git installer
-RUN composer require --update-no-dev \
+RUN mv composer.json-dist composer.json \
+    && composer config secure-http false \
+    && composer require --update-no-dev \
         roundcube/plugin-installer:dev-master \
         roundcube/carddav \
     && ln -sf ../../vendor plugins/carddav/vendor \
