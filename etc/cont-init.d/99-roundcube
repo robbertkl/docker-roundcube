@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd /var/www
+
+for subdir in db logs temp
+do
+    mkdir -p "${subdir}"
+    chown www-data: "${subdir}"
+done
+
+touch logs/errors
+chown www-data: logs/errors

@@ -18,12 +18,11 @@ RUN mv composer.json-dist composer.json \
     && ln -sf ../../vendor plugins/carddav/vendor \
     && composer clear-cache
 
-# Setup rights and logging
-RUN mkdir -p db \
-    && chmod a+rw db logs temp \
-    && touch logs/errors \
-    && chown www-data: logs/errors \
-    && echo /var/www/logs/errors >> /etc/services.d/logs/stderr
+# Init scripts (volume preparation)
+COPY etc /etc
+
+# Setup logging
+RUN echo /var/www/logs/errors >> /etc/services.d/logs/stderr
 
 # Configure Roundcube + plugins
 COPY config.inc.php config/
