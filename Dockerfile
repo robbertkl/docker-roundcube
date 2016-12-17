@@ -15,6 +15,7 @@ RUN mv composer.json-dist composer.json \
     && composer require --update-no-dev \
         roundcube/plugin-installer:dev-master \
         roundcube/carddav \
+        alexandregz/twofactor_gauthenticator:dev-master \
     && ln -sf ../../vendor plugins/carddav/vendor \
     && composer clear-cache
 
