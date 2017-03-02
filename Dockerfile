@@ -10,7 +10,8 @@ RUN VERSION=`latestversion roundcube/roundcubemail` \
     && rm -rf * \
     && git clone --branch ${VERSION} --depth 1 https://github.com/roundcube/roundcubemail.git . \
     && rm -rf .git installer
-RUN mv composer.json-dist composer.json \
+RUN composer self-update --snapshot \
+    && mv composer.json-dist composer.json \
     && composer config secure-http false \
     && composer require --update-no-dev \
         roundcube/plugin-installer:dev-master \
