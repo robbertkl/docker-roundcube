@@ -31,6 +31,9 @@ COPY plugins-password-config.inc.php plugins/password/config.inc.php
 COPY plugins-password-file.php plugins/password/drivers/file.php
 
 # Install missing JS dependencies
+RUN apt-get -qq update && \
+    apt-get install -y unzip file && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN bin/install-jsdeps.sh
 
 # Keep the db in a volume for persistence
