@@ -30,5 +30,8 @@ COPY config.inc.php config/
 COPY plugins-password-config.inc.php plugins/password/config.inc.php
 COPY plugins-password-file.php plugins/password/drivers/file.php
 
+# Install missing JS dependencies
+RUN bin/install-jsdeps.sh
+
 # Keep the db in a volume for persistence
 VOLUME /var/www/db
